@@ -3,6 +3,7 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
+require 'json'
 
 class App
   attr_accessor :all_books, :all_people, :all_rentals
@@ -13,23 +14,42 @@ class App
     @all_rentals = []
   end
 
+  def init_arrays
+    people_json = File.read('people.json')
+    return @all_people = JSON.parse(people_json) unless people_json.empty?
+
+    books_json = File.read('books.json')
+    return @all_books = JSON.parse(books_json) unless books_json.empty?
+
+    rentals_json = File.read('rentals.json')
+    return @all_rentals = JSON.parse(rentals_json) unless rentals_json.empty?
+  end
+
   def books
-    @all_books.each_with_index do |book, index|
-      puts "#{index}) #{book}"
+    if @all_books.empty?
+      puts 'No Books Available'
+    else
+      @all_books.each_with_index do |book, index|
+        puts "#{index}) #{book}"
+      end
     end
   end
 
   def people
-    @all_people.each_with_index do |person, index|
-      puts "#{index}) #{person}"
+    if @all_people.empty?
+      puts 'The record you request is empty'
+    else
+      @all_people.each_with_index do |person, index|
+        puts "#{index}) #{person}"
+      end
     end
   end
 
   def add_student
-    puts 'Age: '
-    age = gets.chomp
     puts 'Name: '
     name = gets.chomp
+    puts 'Age: '
+    age = gets.chomp
     puts 'Has parent persmission[Y/N]: '
     parent_perm = gets.chomp.upcase
     persmission = (parent_perm == 'Y')
@@ -40,10 +60,10 @@ class App
   end
 
   def add_teacher
-    puts 'Age: '
-    age = gets.chomp
     puts 'Name: '
     teacher_name = gets.chomp
+    puts 'Age: '
+    age = gets.chomp
     puts 'Specialization: '
     specialization = gets.chomp
     new_teacher = Teacher.new(age, teacher_name)
@@ -90,10 +110,21 @@ class App
     puts 'Rental Added Successfully'
   end
 
-  def all_personal_rentals(id)
-    person_rental = @all_rentals.select do |rental|
-      rental.person.id == id
+  def all_personal_rentals(_id)
+    @all_rentals.select do |rental|
+      puts rental
     end
-    puts person_rental
+  end
+
+  def save_file
+    rentals_data = @all_rentals.to_json
+    people_data = @all_people.to_json
+    books_data = @all_books.to_json
+
+    File.write('rentals.json', rentals_data)
+
+    File.write('people.json', people_data)
+
+    File.write('books.json', books_data)
   end
 end
