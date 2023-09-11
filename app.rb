@@ -3,7 +3,6 @@ require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
-require 'json'
 
 class App
   attr_accessor :all_books, :all_people, :all_rentals
@@ -12,17 +11,6 @@ class App
     @all_books = []
     @all_people = []
     @all_rentals = []
-  end
-
-  def init_arrays
-    people_json = File.read('people.json')
-    @all_people = JSON.parse(people_json) unless people_json.empty?
-
-    books_json = File.read('books.json')
-    @all_books = JSON.parse(books_json) unless books_json.empty?
-
-    rentals_json = File.read('rentals.json')
-    @all_rentals = JSON.parse(rentals_json) unless rentals_json.empty?
   end
 
   def books
@@ -110,21 +98,10 @@ class App
     puts 'Rental Added Successfully'
   end
 
-  def all_personal_rentals(_id)
-    @all_rentals.select do |rental|
-      puts rental
+  def all_personal_rentals(id)
+    personal_rental = @all_rentals.select do |rental|
+      rental.person.id == id
     end
-  end
-
-  def save_file
-    rentals_data = @all_rentals.to_json
-    people_data = @all_people.to_json
-    books_data = @all_books.to_json
-
-    File.write('rentals.json', rentals_data)
-
-    File.write('people.json', people_data)
-
-    File.write('books.json', books_data)
+    puts personal_rental
   end
 end
