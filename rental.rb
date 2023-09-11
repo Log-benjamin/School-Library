@@ -1,17 +1,17 @@
 require 'date'
 
 class Rental
+  attr_accessor :date, :book, :person
+
   def initialize(date, book, person)
     @date = date
     @book = book
-    @book.rentals << self
+    # @book.rentals << book
     @person = person
-    @person.rentals << self
+    # @person.rentals << book
   end
 
-  attr_accessor :date, :book, :person
-
   def to_s
-    "Book-#{@book}, Date: #{@date}"
+    "Book-#{@book}, Date: #{@date}, Person: #{@person}"
   end
 end

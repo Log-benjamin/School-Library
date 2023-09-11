@@ -25,7 +25,7 @@ class Options
         my_app.all_personal_rentals(id)
       when 7
         puts 'Thank you for using this app!'
-        my_app.save
+        my_app.save_file
         break
       else
         puts 'Your input is Invalid'
