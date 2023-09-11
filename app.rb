@@ -14,22 +14,30 @@ class App
   end
 
   def books
-    @all_books.each_with_index do |book, index|
-      puts "#{index}) #{book}"
+    if @all_books.empty?
+      puts 'No Books Available'
+    else
+      @all_books.each_with_index do |book, index|
+        puts "#{index}) #{book}"
+      end
     end
   end
 
   def people
-    @all_people.each_with_index do |person, index|
-      puts "#{index}) #{person}"
+    if @all_people.empty?
+      puts 'The record you request is empty'
+    else
+      @all_people.each_with_index do |person, index|
+        puts "#{index}) #{person}"
+      end
     end
   end
 
   def add_student
-    puts 'Age: '
-    age = gets.chomp
     puts 'Name: '
     name = gets.chomp
+    puts 'Age: '
+    age = gets.chomp
     puts 'Has parent persmission[Y/N]: '
     parent_perm = gets.chomp.upcase
     persmission = (parent_perm == 'Y')
@@ -40,10 +48,10 @@ class App
   end
 
   def add_teacher
-    puts 'Age: '
-    age = gets.chomp
     puts 'Name: '
     teacher_name = gets.chomp
+    puts 'Age: '
+    age = gets.chomp
     puts 'Specialization: '
     specialization = gets.chomp
     new_teacher = Teacher.new(age, teacher_name)
@@ -91,9 +99,9 @@ class App
   end
 
   def all_personal_rentals(id)
-    person_rental = @all_rentals.select do |rental|
+    personal_rental = @all_rentals.select do |rental|
       rental.person.id == id
     end
-    puts person_rental
+    puts personal_rental
   end
 end

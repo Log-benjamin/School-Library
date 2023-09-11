@@ -80,6 +80,12 @@ In order to run this project you need:
 - Twitter: [@twitte](https://twitter.com/@binyam_tegene)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/binyam-tegene-4b77ab265)
 
+👤 **Aqurds**
+- GitHub: [@Aqurds](https://github.com/Aqurds)
+- Twitter: [@Aqurds](https://twitter.com/Aqurds)
+- LinkedIn: [omaraqurds](https://linkedin.com/in/omaraqurds)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
