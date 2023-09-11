@@ -16,13 +16,13 @@ class App
 
   def init_arrays
     people_json = File.read('people.json')
-    return @all_people = JSON.parse(people_json) unless people_json.empty?
+    @all_people = JSON.parse(people_json) unless people_json.empty?
 
     books_json = File.read('books.json')
-    return @all_books = JSON.parse(books_json) unless books_json.empty?
+    @all_books = JSON.parse(books_json) unless books_json.empty?
 
     rentals_json = File.read('rentals.json')
-    return @all_rentals = JSON.parse(rentals_json) unless rentals_json.empty?
+    @all_rentals = JSON.parse(rentals_json) unless rentals_json.empty?
   end
 
   def books
