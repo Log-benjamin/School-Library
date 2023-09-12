@@ -4,6 +4,7 @@ class Options
   # rubocop:disable Metrics/MethodLength
   def list_option
     my_app = App.new
+    my_app.init_arrays
     main = Main.new
     loop do
       choice = main.menu_list
@@ -24,6 +25,7 @@ class Options
         my_app.all_personal_rentals(id)
       when 7
         puts 'Thank you for using this app!'
+        my_app.save_file
         break
       else
         puts 'Your input is Invalid'
