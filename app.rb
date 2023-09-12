@@ -169,7 +169,7 @@ class App
     adjust_input
     find_people_who_rent
 
-    return puts "Rentals: No record found\n" if @rentals_for_person.length.zero?
+    return puts "Rentals: No record found\n" if @rentals_for_person.empty?
 
     display_rentals
   end
