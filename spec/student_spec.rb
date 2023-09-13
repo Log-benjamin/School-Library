@@ -18,7 +18,7 @@ describe 'Student Class' do
   end
 
   it 'should validate play_hooky method' do
-    expect(@student.play_hooky).to eq "¯\(ツ)/¯"
+    expect(@student.play_hooky).to eq '¯(ツ)/¯'
   end
 
   it 'should validate add classroom method for student' do
