@@ -1,1 +1,1 @@
-[{"type":"student","id":20,"age":"25","name":"Benjamin","parent_permission":true},{"type":"teacher","id":13,"age":"50","name":"Albert","specialization":"Physics"}]
+[{"type":"student","id":20,"age":"25","name":"Benjamin","parent_permission":true},{"type":"teacher","id":13,"age":"50","name":"Albert","specialization":"Physics"},{"type":"teacher","id":43,"age":"32","name":"Yonatan","specialization":"Digital Logic Design"}]
