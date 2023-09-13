@@ -1,37 +1,67 @@
 require_relative 'nameable'
+require_relative 'rental'
 
 class Person < Nameable
-  attr_reader :id
+  attr_reader :id, :parent_permission
   attr_accessor :name, :age, :rentals
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name: 'unknown', parent_permission: false, id: nil)
     super()
-    @id = Random.rand(1..1_000)
-    @name = name
+    @id = id || rand(8..100)
     @age = age
+    @name = name
     @parent_permission = parent_permission
     @rentals = []
   end
 
-  def correct_name
-    @name
+  private
+
+  def of_age?
+    @age >= 18
   end
 
-  def can_use_services?
-    return true if of_age? || parent_permission
+  public
 
-    false
+  def can_use_services?
+    of_age? || @parent_permission
   end
 
   def add_rental(date, book)
     Rental.new(date, book, self)
   end
 
-  private
+  def self.path
+    'store/person.json'
+  end
 
-  def of_age?
-    return true if @age >= 18
+  def self.write_file(data = [])
+    person_store = []
+    data.each do |d|
+      person_store << if d.instance_of?(Student)
+                        { type: 'student', id: d.id, age: d.age, name: d.name, parent_permission: d.parent_permission }
+                      else
+                        { type: 'teacher', id: d.id, age: d.age, name: d.name, specialization: d.specialization }
+                      end
+    end
+    File.write(Person.path, JSON.generate(person_store))
+  end
 
-    false
+  def self.read_file
+    data_arr = []
+    if Person.check_file
+      JSON.parse(File.read(Person.path)).each do |element|
+        if element['type'] == 'student'
+          data_arr << Student.new(element['age'], name: element['name'],
+                                                  parent_permission: element['parent_permission'], id: element['id'])
+        else
+          data_arr << Teacher.new(element['age'], element['specialization'], name: element['name'], id: element['id'])
+        end
+      end
+    end
+    data_arr
+  end
+
+  def self.check_file
+    File.exist?(Person.path)
   end
 end

@@ -1,19 +1,13 @@
-require_relative 'options'
-class Main
-  def menu_list
-    puts ''
-    puts 'Welcome to School Library App!'
-    puts ''
-    puts 'Please choose an option by entering a number: '
-    puts '1 - List all books'
-    puts '2 - List all people'
-    puts '3 - Create a person'
-    puts '4 - Create a book'
-    puts '5 - Create a rental'
-    puts '6 - List all rentals for a given person id'
-    puts '7 - Exit'
-    gets.chomp.to_i
+require_relative 'app'
+
+def main
+  my_app = App.new
+  loop do
+    my_app.options
+    my_app.adjust_input
+    my_app.validate(1, 7)
+    my_app.action_dispatch
   end
 end
-display = Options.new
-display.list_option
+
+main
