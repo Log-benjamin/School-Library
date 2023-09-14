@@ -11,6 +11,7 @@ describe Solver do
   it 'reverse a given word' do
     expect(@solver.reverse('Microverse')).to eq('esrevorciM')
     expect(@solver.reverse('Ruby')).to eq('ybuR')
+    expect(@solver.reverse('hello')).to eq('olleh')
   end
   it 'returns the correct string' do
     expect(@solver.fizzbuzz(2)).to eq('2')
